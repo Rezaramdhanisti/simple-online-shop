@@ -1,0 +1,19 @@
+{
+  "name": "simple-online-shop",
+  "version": "1.0.0",
+  "description": "Full stack simple online shop application",
+  "scripts": {
+    "start": "docker-compose up",
+    "stop": "docker-compose down",
+    "start:dev": "docker-compose up --build",
+    "restart:clean": "docker-compose down && docker system prune -f && docker-compose build --no-cache && docker-compose up",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "start:ngrok": "ngrok http --host-header=rewrite 5001"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
