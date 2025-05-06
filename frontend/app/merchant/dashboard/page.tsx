@@ -48,7 +48,12 @@ export default function MerchantDashboard() {
       try {
         setLoading(true);
         const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-        const response = await fetch(`${apiUrl}/api/products`);
+        const response = await fetch(`${apiUrl}/api/products`, {
+          headers: {
+            'ngrok-skip-browser-warning': 'true',
+            'Content-Type': 'application/json'
+          }
+        });
         
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -148,7 +153,8 @@ export default function MerchantDashboard() {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': token ? `Bearer ${token}` : ''
+          'Authorization': token ? `Bearer ${token}` : '',
+          'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify(productData)
       });

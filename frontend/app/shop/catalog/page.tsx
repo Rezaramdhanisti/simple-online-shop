@@ -125,8 +125,13 @@ export default function Home() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
-        const response = await fetch(`${apiUrl}/api/products`);
+        const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL ;
+        const response = await fetch(`${apiUrl}/api/products`, {
+          headers: {
+            'ngrok-skip-browser-warning': 'true',
+            'Content-Type': 'application/json'
+          }
+        });
         
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
